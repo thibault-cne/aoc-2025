@@ -2,7 +2,7 @@ advent_of_code::solution!(1);
 
 pub fn part_one(input: &str) -> Option<u32> {
     let res = input.lines().fold((50, 0), |mut acc, l| {
-        assert!(l.len() >= 1);
+        assert!(!l.is_empty());
         let str = l.as_bytes();
         let is_left = matches!(str[0], b'L');
         let rotations = unsafe { l.get_unchecked(1..) }.parse::<isize>().unwrap();
@@ -25,7 +25,7 @@ pub fn part_one(input: &str) -> Option<u32> {
 
 pub fn part_two(input: &str) -> Option<u32> {
     let res = input.lines().fold((50, 0), |mut acc, l| {
-        assert!(l.len() >= 1);
+        assert!(!l.is_empty());
         let str = l.as_bytes();
         let is_left = matches!(str[0], b'L');
         let rotations = unsafe { l.get_unchecked(1..) }.parse::<isize>().unwrap();
@@ -35,7 +35,7 @@ pub fn part_two(input: &str) -> Option<u32> {
         } else {
             acc.0 + rotations
         };
-        let mut rev = (compute / 100).abs() as u32;
+        let mut rev = (compute / 100).unsigned_abs() as u32;
 
         if acc.0 != 0 && compute <= 0 {
             rev += 1;

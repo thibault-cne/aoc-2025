@@ -10,7 +10,7 @@ pub fn part_one(input: &str) -> Option<u64> {
         acc + (l..=r).fold(0, |acc, id| {
             let id_str = id.to_string();
             let half = id_str.len() / 2;
-            if &id_str[..half] == &id_str[half..] {
+            if id_str[..half] == id_str[half..] {
                 acc + id
             } else {
                 acc
@@ -34,7 +34,7 @@ pub fn part_two(input: &str) -> Option<u64> {
             acc + (0..half)
                 .filter(|limit| id_str.len().rem_euclid(limit + 1) == 0)
                 .find(|&limit| {
-                    (&id_str[..=limit])
+                    id_str[..=limit]
                         .chars()
                         .cycle()
                         .zip(id_str.chars())

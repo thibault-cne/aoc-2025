@@ -34,11 +34,7 @@ pub fn part_one(input: &str) -> Option<u32> {
         .skip(1)
         .map(|l| l.parse::<usize>().unwrap())
         .fold(0, |acc, id| {
-            if ranges
-                .iter()
-                .find(|(l, r)| (l..=r).contains(&&id))
-                .is_some()
-            {
+            if ranges.iter().any(|(l, r)| (l..=r).contains(&&id)) {
                 acc + 1
             } else {
                 acc

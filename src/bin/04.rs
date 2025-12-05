@@ -14,44 +14,62 @@ pub fn part_one(input: &str) -> Option<u32> {
 
                 if i > 0 {
                     if j > 0 {
-                        cpt += (bytes[(i - 1) * line_len + j - 1] == b'@')
-                            .then_some(1)
-                            .unwrap_or_default();
+                        cpt += if bytes[(i - 1) * line_len + j - 1] == b'@' {
+                            1
+                        } else {
+                            0
+                        };
                     }
-                    cpt += (bytes[(i - 1) * line_len + j] == b'@')
-                        .then_some(1)
-                        .unwrap_or_default();
+                    cpt += if bytes[(i - 1) * line_len + j] == b'@' {
+                        1
+                    } else {
+                        0
+                    };
+
                     if j < line_len - 1 {
-                        cpt += (bytes[(i - 1) * line_len + j + 1] == b'@')
-                            .then_some(1)
-                            .unwrap_or_default();
+                        cpt += if bytes[(i - 1) * line_len + j + 1] == b'@' {
+                            1
+                        } else {
+                            0
+                        };
                     }
                 }
 
                 if j > 0 {
-                    cpt += (bytes[i * line_len + j - 1] == b'@')
-                        .then_some(1)
-                        .unwrap_or_default();
+                    cpt += if bytes[i * line_len + j - 1] == b'@' {
+                        1
+                    } else {
+                        0
+                    };
                 }
                 if j < line_len - 1 {
-                    cpt += (bytes[i * line_len + j + 1] == b'@')
-                        .then_some(1)
-                        .unwrap_or_default();
+                    cpt += if bytes[i * line_len + j + 1] == b'@' {
+                        1
+                    } else {
+                        0
+                    };
                 }
 
                 if i < bytes.len() / line_len - 1 {
                     if j > 0 {
-                        cpt += (bytes[(i + 1) * line_len + j - 1] == b'@')
-                            .then_some(1)
-                            .unwrap_or_default();
+                        cpt += if bytes[(i + 1) * line_len + j - 1] == b'@' {
+                            1
+                        } else {
+                            0
+                        };
                     }
-                    cpt += (bytes[(i + 1) * line_len + j] == b'@')
-                        .then_some(1)
-                        .unwrap_or_default();
+                    cpt += if bytes[(i + 1) * line_len + j] == b'@' {
+                        1
+                    } else {
+                        0
+                    };
+
                     if j < line_len - 1 {
-                        cpt += (bytes[(i + 1) * line_len + j + 1] == b'@')
-                            .then_some(1)
-                            .unwrap_or_default();
+                        cpt += if bytes[(i + 1) * line_len + j + 1] == b'@' {
+                            1
+                        } else {
+                            0
+                        };
                     }
                 }
 
@@ -121,45 +139,33 @@ pub fn part_two(input: &str) -> Option<u32> {
                 let mut indexes = HashSet::with_capacity(8);
 
                 if i > 0 {
-                    if j > 0 {
-                        if bytes[(i - 1) * line_len + j - 1] == b'@' {
-                            indexes.insert((i - 1) * line_len + j - 1);
-                        }
+                    if j > 0 && bytes[(i - 1) * line_len + j - 1] == b'@' {
+                        indexes.insert((i - 1) * line_len + j - 1);
                     }
                     if bytes[(i - 1) * line_len + j] == b'@' {
                         indexes.insert((i - 1) * line_len + j);
                     }
-                    if j < line_len - 1 {
-                        if bytes[(i - 1) * line_len + j + 1] == b'@' {
-                            indexes.insert((i - 1) * line_len + j + 1);
-                        }
+                    if j < line_len - 1 && bytes[(i - 1) * line_len + j + 1] == b'@' {
+                        indexes.insert((i - 1) * line_len + j + 1);
                     }
                 }
 
-                if j > 0 {
-                    if bytes[i * line_len + j - 1] == b'@' {
-                        indexes.insert(i * line_len + j - 1);
-                    }
+                if j > 0 && bytes[i * line_len + j - 1] == b'@' {
+                    indexes.insert(i * line_len + j - 1);
                 }
-                if j < line_len - 1 {
-                    if bytes[i * line_len + j + 1] == b'@' {
-                        indexes.insert(i * line_len + j + 1);
-                    }
+                if j < line_len - 1 && bytes[i * line_len + j + 1] == b'@' {
+                    indexes.insert(i * line_len + j + 1);
                 }
 
                 if i < bytes.len() / line_len - 1 {
-                    if j > 0 {
-                        if bytes[(i + 1) * line_len + j - 1] == b'@' {
-                            indexes.insert((i + 1) * line_len + j - 1);
-                        }
+                    if j > 0 && bytes[(i + 1) * line_len + j - 1] == b'@' {
+                        indexes.insert((i + 1) * line_len + j - 1);
                     }
                     if bytes[(i + 1) * line_len + j] == b'@' {
                         indexes.insert((i + 1) * line_len + j);
                     }
-                    if j < line_len - 1 {
-                        if bytes[(i + 1) * line_len + j + 1] == b'@' {
-                            indexes.insert((i + 1) * line_len + j + 1);
-                        }
+                    if j < line_len - 1 && bytes[(i + 1) * line_len + j + 1] == b'@' {
+                        indexes.insert((i + 1) * line_len + j + 1);
                     }
                 }
 
